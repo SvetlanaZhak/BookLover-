@@ -7,6 +7,7 @@ import React, { useState } from "react";
 //   CardButton,
 //   CardImage,
 // } from "react-native-cards";
+import Icon from "react-native-vector-icons/FontAwesome";
 import { Card } from "react-native-elements";
 import {
   StyleSheet,
@@ -35,7 +36,11 @@ export default function App() {
         Alert.alert("Error", error);
       });
   };
-
+  const myButton = (
+    <Icon.Button name="search" backgroundColor="violet" onPress={getResult}>
+      Search
+    </Icon.Button>
+  );
   const listSeparator = () => {
     return (
       <View
@@ -65,7 +70,8 @@ export default function App() {
         placeholder="Search"
         onChangeText={(input) => setInput(input)}
       />
-      <Button title="Find" onPress={getResult} />
+      {/* <Button title="Find" onPress={getResult} /> */}
+      {myButton}
       <FlatList
         style={{ textAlign: "center", width: "80%" }}
         keyExtractor={(item) => item.id}
