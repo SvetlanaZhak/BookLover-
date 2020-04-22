@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-// import { GoogleBookSearch } from "react-native-google-books";
+// import {
+//   Card,
+//   CardTitle,
+//   CardContent,
+//   CardAction,
+//   CardButton,
+//   CardImage,
+// } from "react-native-cards";
+import { Card } from "react-native-elements";
 import {
   StyleSheet,
   Text,
@@ -46,11 +54,12 @@ export default function App() {
       <TextInput
         style={{
           fontSize: 18,
-          width: 200,
+          width: 250,
           textAlign: "center",
           marginTop: 60,
-          borderColor: "blue",
+          borderColor: "violet",
           borderWidth: 2,
+          height: 40,
         }}
         value={input}
         placeholder="Search"
@@ -58,17 +67,21 @@ export default function App() {
       />
       <Button title="Find" onPress={getResult} />
       <FlatList
-        style={{ marginLeft: "5%" }}
+        style={{ textAlign: "center", width: "80%" }}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View>
-            <Text>Title: {item.volumeInfo.title}</Text>
-            <Text>Author: {item.volumeInfo.authors}</Text>
-            <Image
-              style={{ width: 100, height: 100, margin: 10 }}
-              source={{ uri: item.volumeInfo.imageLinks.smallThumbnail }}
-            />
-          </View>
+          <Card
+            containerStyle={{ padding: 10, height: 350 }}
+            key={item.id}
+            title={item.volumeInfo.title}
+            style={styles.image}
+            resizeMode="cover"
+            image={{ uri: item.volumeInfo.imageLinks.smallThumbnail }}
+          >
+            <Text style={{ textAlign: "center", padding: 10, marginTop: 10 }}>
+              by {item.volumeInfo.authors}
+            </Text>
+          </Card>
         )}
         ItemSeparatorComponent={listSeparator}
         data={result}
@@ -80,7 +93,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "pink",
     alignItems: "center",
     justifyContent: "center",
   },
