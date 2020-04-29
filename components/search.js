@@ -8,7 +8,7 @@ import React, { useState } from "react";
 //   CardImage,
 // } from "react-native-cards";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Card, CheckBox } from "react-native-elements";
+// import { Card, CheckBox } from "react-native-elements";
 // import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 // import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { BookCard } from "./card";
@@ -49,15 +49,15 @@ function search(props) {
     </Icon.Button>
   );
 
-  const favButton = (
-    <Icon.Button
-      name="heart"
-      backgroundColor="violet"
-      onPress={() => navigate("Favourites", { favouritesList })}
-    >
-      Favourites
-    </Icon.Button>
-  );
+  // const favButton = (
+  //   <Icon.Button
+  //     name="heart"
+  //     backgroundColor="violet"
+  //     onPress={() => navigate("Favourites", { favouritesList })}
+  //   >
+  //     Favourites
+  //   </Icon.Button>
+  // );
   const listSeparator = () => {
     return (
       <View
@@ -74,7 +74,7 @@ function search(props) {
   const { navigate } = props.navigation;
   return (
     <View style={styles.container}>
-      <View style={styles.favourites}>{favButton}</View>
+      {/* <View style={styles.favourites}>{favButton}</View> */}
 
       <TextInput
         style={{
@@ -102,25 +102,6 @@ function search(props) {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <>
-            {/* <Card
-              title={item.volumeInfo.title}
-              containerStyle={{
-                padding: 10,
-                height: 300,
-                paddingTop: 10,
-                width: "60%",
-              }}
-              key={item.id}
-              style={{ position: "absolute" }}
-              // resizeMode="cover"
-              image={{
-                uri: item.volumeInfo.imageLinks.smallThumbnail,
-              }}
-            >
-              <Text style={{ textAlign: "center", paddingTop: 5, fontSize: 7 }}>
-                by {item.volumeInfo.authors}
-              </Text>
-            </Card> */}
             <BookCard
               item={item}
               checked={favouritesList.includes(item)}

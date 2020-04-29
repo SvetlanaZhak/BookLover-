@@ -5,7 +5,8 @@ import { BookCard } from "./card";
 
 function favourites(props) {
   navigationOptions = { title: "Favourites" };
-  const { favouritesList } = props.navigation.state.params;
+  // const { favouritesList } = props.navigation.state.params;
+  const favouritesList = [];
 
   console.log(favouritesList);
   console.log("sadfsdafsd");
@@ -55,6 +56,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-favourites.navigationOptions = ({ navigate }) => ({ title: "Favourites" });
+// favourites.navigationOptions = ({ navigate }) => ({ title: "Favourites" });
 
 export default favourites;
