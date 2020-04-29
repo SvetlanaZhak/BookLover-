@@ -7,28 +7,18 @@ import LoadingScreen from "./screens/LoadingScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
-
+import FirebaseKeys from "./config";
 import favourites from "./components/favourites";
 import search from "./components/search";
 
 import * as firebase from "firebase";
 
-import NotificationScreen from "./screens/NotificationScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 
-var firebaseConfig = {
-  apiKey: "AIzaSyDypBp7rLq3boi2BR80pmO1AVziCFa5Lg8",
-  authDomain: "booklover-274814.firebaseapp.com",
-  databaseURL: "https://booklover-274814.firebaseio.com",
-  projectId: "booklover-274814",
-  storageBucket: "booklover-274814.appspot.com",
-  messagingSenderId: "696602087646",
-  measurementId: "G-1GR67KTR3Q",
-  appId: "1:696602087646:web:f3d3e5b5d9cf02411cb24f",
-};
-//Initialize firebase
+var firebaseConfig = FirebaseKeys;
 
 firebase.initializeApp(firebaseConfig);
+//Initialize firebase
 
 const AppTabNavigator = createBottomTabNavigator(
   {

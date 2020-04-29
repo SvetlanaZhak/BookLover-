@@ -24,6 +24,14 @@ export default class RegisterScreen extends React.Component {
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then((userCredentials) => {
+        // console.log();
+        // console.log();
+        // console.log();
+        // console.log();
+
+        // db.collection("users")
+        //   .doc(userCredentials.user.uid)
+        //   .set({ bio: signupForm["signup-bio"].value });
         return userCredentials.user.updateProfile({
           displayName: this.state.name,
         });
@@ -32,6 +40,7 @@ export default class RegisterScreen extends React.Component {
   };
 
   render() {
+    console.log(displayName);
     return (
       <View style={styles.container}>
         <ImageBackground

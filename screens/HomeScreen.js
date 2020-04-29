@@ -16,10 +16,14 @@ export default class HomeScreen extends React.Component {
   signOutUser = () => {
     firebase.auth().signOut();
   };
+
+  // firebase.auth().currentUser
   render() {
+    //   console.log(displayName);
+
     return (
       <View style={styles.container}>
-        <Text>Hi {this.state.email}!</Text>
+        <Text>Hi {this.displayName}!</Text>
         <TouchableOpacity style={{ marginTop: 32 }} onPress={this.signOutUser}>
           <Text>Logout</Text>
         </TouchableOpacity>

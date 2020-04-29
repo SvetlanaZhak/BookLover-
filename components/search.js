@@ -1,16 +1,6 @@
-import React, { useState } from "react";
-// import {
-//   Card,
-//   CardTitle,
-//   CardContent,
-//   CardAction,
-//   CardButton,
-//   CardImage,
-// } from "react-native-cards";
+import React, { useState, useEffect } from "react";
+
 import Icon from "react-native-vector-icons/FontAwesome";
-// import { Card, CheckBox } from "react-native-elements";
-// import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-// import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { BookCard } from "./card";
 import {
   StyleSheet,
@@ -25,13 +15,40 @@ import {
   // Linking,
   // TouchableOpacity,
 } from "react-native";
+import * as firebase from "firebase";
+import FirebaseKeys from "../config";
+
+var firebaseConfig = FirebaseKeys;
 
 function search(props) {
   navigationOptions = { title: "Search" };
   const [input, setInput] = useState("");
   const [result, setResult] = useState("");
   const [favouritesList, setFavouritesList] = useState([]);
+  // const [users, setUsers] = useState([]);
 
+  // useEffect(() => {
+  //   firebase
+  //     .database()
+  //     .ref("users/")
+  //     .on("value", (snapshot) => {
+  //       const data = snapshot.val() ? snapshot.val() : {};
+  //       const userList = Object.values(data);
+  //       setUsers(userList);
+  //     });
+  // }, []);
+
+  // Save favourite items to the database
+  // const saveFavouriteList = () => {
+  //   firebase.database().ref("users/").push({ favouritesList: favouritesList });
+  // };
+
+  // var uid = firebase.auth().currentUser.uid;
+  // firebase.database().ref().child("users").child(uid).set({
+  //   email: user.email,
+  //   userId: uid,
+  // });
+  // console.log(uid, "YES");
   const getResult = () => {
     const url = `https://www.googleapis.com/books/v1/volumes?q=${input}+intitle:${input}&key=AIzaSyDypBp7rLq3boi2BR80pmO1AVziCFa5Lg8`;
     fetch(url)
@@ -115,6 +132,10 @@ function search(props) {
                   setFavouritesList([...favouritesList, item]);
                 }
               }}
+              // onPress={(favouritesList) => {
+              //   setFavouritesList(favouritesList);
+              //   saveFavouriteList;
+              // }}
             />
           </>
         )}
