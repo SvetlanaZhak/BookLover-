@@ -25,23 +25,26 @@ function search(props) {
   const [input, setInput] = useState("");
   const [result, setResult] = useState("");
   const [favouritesList, setFavouritesList] = useState([]);
-  // const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
 
-  // useEffect(() => {
-  //   firebase
-  //     .database()
-  //     .ref("users/")
-  //     .on("value", (snapshot) => {
-  //       const data = snapshot.val() ? snapshot.val() : {};
-  //       const userList = Object.values(data);
-  //       setUsers(userList);
-  //     });
-  // }, []);
+  useEffect(() => {
+    firebase
+      .database()
+      .ref("users/")
+      .on("value", (snapshot) => {
+        const data = snapshot.val() ? snapshot.val() : {};
+        const userList = Object.values(data);
+        setUsers(userList);
+      });
+  }, []);
 
   // Save favourite items to the database
-  // const saveFavouriteList = () => {
-  //   firebase.database().ref("users/").push({ favouritesList: favouritesList });
-  // };
+  const saveFavouriteList = (newFavoritesList) => {
+    firebase
+      .database()
+      .ref("users/")
+      .push({ favouritesList: newFavoritesList });
+  };
 
   // var uid = firebase.auth().currentUser.uid;
   // firebase.database().ref().child("users").child(uid).set({
@@ -124,18 +127,12 @@ function search(props) {
               checked={favouritesList.includes(item)}
               onPress={() => {
                 const checked = favouritesList.includes(item);
-                if (checked) {
-                  setFavouritesList(
-                    favouritesList.filter((item2) => item2.id !== item.id)
-                  );
-                } else {
-                  setFavouritesList([...favouritesList, item]);
-                }
+                const newFavoritesList = checked
+                  ? favouritesList.filter((item2) => item2.id !== item.id)
+                  : [...favouritesList, item];
+                setFavouritesList(newFavoritesList);
+                saveFavouriteList(newFavoritesList);
               }}
-              // onPress={(favouritesList) => {
-              //   setFavouritesList(favouritesList);
-              //   saveFavouriteList;
-              // }}
             />
           </>
         )}

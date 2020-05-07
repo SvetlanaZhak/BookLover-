@@ -20,6 +20,7 @@ import {
 } from "react-native";
 
 export function BookCard({ item, checked, onPress }) {
+  console.log("NNOOOO", item);
   return (
     <Card key={item.id} title={item.volumeInfo.title} style={{}}>
       <View key={item.id} style={styles.container}>
