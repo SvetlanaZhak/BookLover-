@@ -53,7 +53,7 @@ export function BookCard({ item, checked, onPress }) {
               <Text style={styles.btnText}>Buy</Text>
             </TouchableOpacity>
           ) : (
-            <Text>" "</Text>
+            <Text> </Text>
           )}
         </View>
       </View>

@@ -27,23 +27,34 @@ function search(props) {
   const [favouritesList, setFavouritesList] = useState([]);
   const [users, setUsers] = useState([]);
 
+  const { currentUser } = firebase.auth();
+  // useEffect(() => {
+  //   const userfavorites = firebase
+  //     .database()
+  //     .ref(`/users/${currentUser.uid}/favorites/`);
+  //   userfavorites.once("value").then((snapshot) => {
+  //     const data = snapshot.val() ? snapshot.val() : {};
+  //     const userList = Object.values(data);
+  //     setUsers(userList);
+  //   });
+  // }, []);
+
   useEffect(() => {
     firebase
       .database()
-      .ref("users/")
+      .ref(`users/${currentUser.uid}/favourites/`)
       .on("value", (snapshot) => {
         const data = snapshot.val() ? snapshot.val() : {};
         const userList = Object.values(data);
         setUsers(userList);
       });
   }, []);
-
   // Save favourite items to the database
-  const saveFavouriteList = (newFavoritesList) => {
+  const saveFavouriteList = (newFavoritesItem) => {
     firebase
       .database()
-      .ref("users/")
-      .push({ favouritesList: newFavoritesList });
+      .ref(`users/${currentUser.uid}/favourites/`)
+      .push(newFavoritesItem);
   };
 
   // var uid = firebase.auth().currentUser.uid;
@@ -126,12 +137,14 @@ function search(props) {
               item={item}
               checked={favouritesList.includes(item)}
               onPress={() => {
-                const checked = favouritesList.includes(item);
+                let checked = favouritesList.includes(item);
+
                 const newFavoritesList = checked
                   ? favouritesList.filter((item2) => item2.id !== item.id)
                   : [...favouritesList, item];
+
                 setFavouritesList(newFavoritesList);
-                saveFavouriteList(newFavoritesList);
+                saveFavouriteList(item);
               }}
             />
           </>

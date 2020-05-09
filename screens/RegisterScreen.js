@@ -23,15 +23,20 @@ export default class RegisterScreen extends React.Component {
     firebase
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
+
       .then((userCredentials) => {
-        // console.log();
+        // const { currentUser } = firebase.auth();
+
+        // console.log("SUKA", currentUser.uid);
         // console.log();
         // console.log();
         // console.log();
 
-        // db.collection("users")
-        //   .doc(userCredentials.user.uid)
-        //   .set({ bio: signupForm["signup-bio"].value });
+        // db.collection("users").doc(currentUser.uid).set({
+        //   name: "Los Angeles",
+        //   state: "CA",
+        //   country: "USA",
+        // });
         return userCredentials.user.updateProfile({
           displayName: this.state.name,
         });
@@ -40,7 +45,7 @@ export default class RegisterScreen extends React.Component {
   };
 
   render() {
-    console.log(displayName);
+    // console.log(displayName);
     return (
       <View style={styles.container}>
         <ImageBackground
