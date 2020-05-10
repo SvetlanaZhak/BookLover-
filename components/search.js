@@ -28,16 +28,6 @@ function search(props) {
   const [users, setUsers] = useState([]);
 
   const { currentUser } = firebase.auth();
-  // useEffect(() => {
-  //   const userfavorites = firebase
-  //     .database()
-  //     .ref(`/users/${currentUser.uid}/favorites/`);
-  //   userfavorites.once("value").then((snapshot) => {
-  //     const data = snapshot.val() ? snapshot.val() : {};
-  //     const userList = Object.values(data);
-  //     setUsers(userList);
-  //   });
-  // }, []);
 
   useEffect(() => {
     firebase
@@ -49,6 +39,7 @@ function search(props) {
         setUsers(userList);
       });
   }, []);
+
   // Save favourite items to the database
   const saveFavouriteList = (newFavoritesItem) => {
     firebase
@@ -57,12 +48,6 @@ function search(props) {
       .push(newFavoritesItem);
   };
 
-  // var uid = firebase.auth().currentUser.uid;
-  // firebase.database().ref().child("users").child(uid).set({
-  //   email: user.email,
-  //   userId: uid,
-  // });
-  // console.log(uid, "YES");
   const getResult = () => {
     const url = `https://www.googleapis.com/books/v1/volumes?q=${input}+intitle:${input}&key=AIzaSyDypBp7rLq3boi2BR80pmO1AVziCFa5Lg8`;
     fetch(url)
@@ -80,15 +65,6 @@ function search(props) {
     </Icon.Button>
   );
 
-  // const favButton = (
-  //   <Icon.Button
-  //     name="heart"
-  //     backgroundColor="violet"
-  //     onPress={() => navigate("Favourites", { favouritesList })}
-  //   >
-  //     Favourites
-  //   </Icon.Button>
-  // );
   const listSeparator = () => {
     return (
       <View

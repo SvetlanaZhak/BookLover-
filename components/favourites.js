@@ -14,7 +14,6 @@ function favourites(props) {
 
   useEffect(() => {
     const { currentUser } = firebase.auth();
-    console.log("TYT", currentUser);
 
     firebase
       .database()
@@ -27,11 +26,18 @@ function favourites(props) {
         if (prods.length != 0) {
           setFavouritesList(prods);
         }
-        // console.log(prods[prods.length - 1].favouritesList);
       });
   }, []);
-  console.log("MOMOI", favouritesList.length);
-  console.log("MOMOI", typeof favouritesList);
+
+  // Delete favourite items from the database
+  const deleteFavouriteItem = (newFavoritesItem) => {
+    console.log("TAM", currentUser);
+    firebase
+      .database()
+      .ref(`users/${currentUser.uid}/favourites/`)
+      .delete(newFavoritesItem);
+  };
+
   return (
     <View style={styles.container}>
       <Text
@@ -58,12 +64,14 @@ function favourites(props) {
             item={item}
             checked={favouritesList.includes(item)}
             onPress={() => {
-              const checked = favouritesList.includes(item);
+              let checked = favouritesList.includes(item);
+
               const newFavoritesList = checked
                 ? favouritesList.filter((item2) => item2.id !== item.id)
                 : [...favouritesList, item];
+
               setFavouritesList(newFavoritesList);
-              saveFavouriteList(newFavoritesList);
+              deleteFavouriteItem(newFavoritesList);
             }}
           />
         )}
@@ -80,6 +88,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-// favourites.navigationOptions = ({ navigate }) => ({ title: "Favourites" });
 
 export default favourites;

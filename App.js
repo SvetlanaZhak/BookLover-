@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from "react-navigation-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import LoadingScreen from "./screens/LoadingScreen";
 import RegisterScreen from "./screens/RegisterScreen";
+import ForgotPassword from "./screens/ForgotPassword";
 import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
 import FirebaseKeys from "./config";
@@ -69,6 +70,7 @@ const AppTabNavigator = createBottomTabNavigator(
 const AuthStack = createStackNavigator({
   Login: LoginScreen,
   Register: RegisterScreen,
+  ForgotPassword: ForgotPassword,
 });
 
 export default createAppContainer(

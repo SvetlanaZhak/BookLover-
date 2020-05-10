@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import * as firebase from "firebase";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 export default class HomeScreen extends React.Component {
   state = {
@@ -25,10 +26,18 @@ export default class HomeScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text>Hi {this.state.displayName}!</Text>
-        <TouchableOpacity style={{ marginTop: 32 }} onPress={this.signOutUser}>
-          <Text>Logout</Text>
-        </TouchableOpacity>
+        <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 32 }}>
+          Hi {this.state.displayName}!
+        </Text>
+        {/* <TouchableOpacity style={{ marginTop: 32 }} onPress={this.signOutUser}> */}
+        <Icon.Button
+          name="sign-out"
+          backgroundColor="violet"
+          onPress={this.signOutUser}
+        >
+          Logout
+        </Icon.Button>
+        {/* </TouchableOpacity> */}
       </View>
     );
   }
@@ -39,5 +48,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "pink",
   },
 });

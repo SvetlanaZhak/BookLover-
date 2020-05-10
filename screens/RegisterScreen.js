@@ -25,18 +25,6 @@ export default class RegisterScreen extends React.Component {
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
 
       .then((userCredentials) => {
-        // const { currentUser } = firebase.auth();
-
-        // console.log("SUKA", currentUser.uid);
-        // console.log();
-        // console.log();
-        // console.log();
-
-        // db.collection("users").doc(currentUser.uid).set({
-        //   name: "Los Angeles",
-        //   state: "CA",
-        //   country: "USA",
-        // });
         return userCredentials.user.updateProfile({
           displayName: this.state.name,
         });
@@ -164,17 +152,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  // back: {
-  //   position: "absolute",
-  //   top: 48,
-  //   left: 32,
-  //   width: 32,
-  //   height: 32,
-  //   borderRadius: 16,
-  //   backgroundColor: "rgba(21, 22, 48, 0.1)",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // },
+
   backgroundImage: {
     flex: 1,
     resizeMode: "cover",

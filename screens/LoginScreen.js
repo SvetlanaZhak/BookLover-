@@ -30,15 +30,13 @@ export default class LoginScreen extends React.Component {
       .signInWithEmailAndPassword(email, password)
       .catch((error) => this.setState({ errorMessage: error.message }));
   };
+
   render() {
     LayoutAnimation.easeInEaseOut();
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content"></StatusBar>
-        {/* <Image
-          source={require("../assets/signin.png")}
-          style={{ flex: 1, resizeMode: "cover", justifyContent: "center" }}
-        ></Image> */}
+
         <ImageBackground
           source={require("../assets/sign.png")}
           style={styles.backgroundImage}
@@ -75,7 +73,13 @@ export default class LoginScreen extends React.Component {
           </View>
 
           <TouchableOpacity style={styles.button} onPress={this.handleLogin}>
-            <Text style={{ color: "white", fontWeight: "bold", fontSize: 20 }}>
+            <Text
+              style={{
+                color: "white",
+                fontWeight: "bold",
+                fontSize: 20,
+              }}
+            >
               Sign in
             </Text>
           </TouchableOpacity>
@@ -96,6 +100,25 @@ export default class LoginScreen extends React.Component {
               >
                 {" "}
                 Sign Up
+              </Text>
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{ alignSelf: "center" }}
+            onPress={() => this.props.navigation.navigate("ForgotPassword")}
+          >
+            <Text style={{ color: "white", fontSize: 20 }}>
+              I forgot password{" "}
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  color: "hotpink",
+                  fontSize: 20,
+                  margin: 10,
+                }}
+              >
+                {" "}
+                Need help
               </Text>
             </Text>
           </TouchableOpacity>
