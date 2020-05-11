@@ -65,7 +65,7 @@ function favourites(props) {
       <FlatList
         style={{
           textAlign: "center",
-          width: "80%",
+          width: "90%",
           backgroundColor: "pink",
         }}
         data={favouritesList}

@@ -29,17 +29,6 @@ export function BookCard({ item, checked, onPress }) {
           source={{ uri: item.volumeInfo.imageLinks.smallThumbnail }}
         />
         <Text style={styles.authors}>by {item.volumeInfo.authors}</Text>
-        <CheckBox
-          style={{ paddingTop: 20 }}
-          right
-          size={30}
-          checkedIcon="heart"
-          uncheckedIcon="heart-o"
-          checkedColor="violet"
-          uncheckedColor="violet"
-          checked={checked}
-          onPress={onPress}
-        />
         <View>
           {item.saleInfo.buyLink ? (
             <TouchableOpacity
@@ -54,6 +43,22 @@ export function BookCard({ item, checked, onPress }) {
             <Text> </Text>
           )}
         </View>
+        <Text>
+          {" "}
+          {""}
+          {""}
+        </Text>
+        <CheckBox
+          style={{ paddingTop: 20 }}
+          right
+          size={30}
+          checkedIcon="heart"
+          uncheckedIcon="heart-o"
+          checkedColor="violet"
+          uncheckedColor="violet"
+          checked={checked}
+          onPress={onPress}
+        />
       </View>
     </Card>
   );
@@ -70,7 +75,7 @@ const styles = StyleSheet.create({
 
   image: {
     display: "flex",
-    width: 100,
+    width: 130,
     height: 300,
     margin: 5,
     alignSelf: "flex-start",

@@ -97,7 +97,7 @@ function search(props) {
       <FlatList
         style={{
           textAlign: "center",
-          width: "80%",
+          width: "90%",
           backgroundColor: "pink",
         }}
         keyExtractor={(item) => item.id}
