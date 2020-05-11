@@ -4,6 +4,7 @@ import { StackNavigator } from "react-navigation";
 import { BookCard } from "./card";
 import * as firebase from "firebase";
 import FirebaseKeys from "../config";
+import { rewriteFavouriteList } from "./utils";
 
 var firebaseConfig = FirebaseKeys;
 
@@ -14,15 +15,12 @@ function favourites(props) {
 
   useEffect(() => {
     const { currentUser } = firebase.auth();
-
     firebase
       .database()
       .ref(`users/${currentUser.uid}/favourites/`)
       .on("value", (snapshot) => {
-        const data = snapshot.val();
+        const data = snapshot.val() || {};
         const prods = Object.values(data);
-        console.log("PRODS", prods.length);
-        console.log("AAA", prods);
         if (prods.length != 0) {
           setFavouritesList(prods);
         }
@@ -30,14 +28,26 @@ function favourites(props) {
   }, []);
 
   // Delete favourite items from the database
-  const deleteFavouriteItem = (newFavoritesItem) => {
-    console.log("TAM", currentUser);
-    firebase
-      .database()
-      .ref(`users/${currentUser.uid}/favourites/`)
-      .delete(newFavoritesItem);
-  };
-
+  // const deleteFavouriteItem = (newFavoritesItem) => {
+  //   const { currentUser } = firebase.auth();
+  //   console.log("TAM", currentUser);
+  //   firebase
+  //     .database()
+  //     .ref(`users/${currentUser.uid}/favourites/`)
+  //     .delete();
+  // };
+  // deleteFavouriteItem = () => {
+  //   const { currentUser } = firebase.auth();
+  //   firebase
+  //     .doc(`users/${currentUser.uid}/favourites/${newFavoritesList}`)
+  //     .delete()
+  //     .then(function () {
+  //       console.log("Document successfully deleted!");
+  //     })
+  //     .catch(function (error) {
+  //       console.error("Error removing document: ", error);
+  //     });
+  // };
   return (
     <View style={styles.container}>
       <Text
@@ -71,7 +81,8 @@ function favourites(props) {
                 : [...favouritesList, item];
 
               setFavouritesList(newFavoritesList);
-              deleteFavouriteItem(newFavoritesList);
+              console.log(newFavoritesList);
+              rewriteFavouriteList(newFavoritesList);
             }}
           />
         )}

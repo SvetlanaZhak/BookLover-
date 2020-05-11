@@ -17,6 +17,7 @@ import {
 } from "react-native";
 import * as firebase from "firebase";
 import FirebaseKeys from "../config";
+import { rewriteFavouriteList, saveFavouriteList } from "./utils";
 
 var firebaseConfig = FirebaseKeys;
 
@@ -34,20 +35,13 @@ function search(props) {
       .database()
       .ref(`users/${currentUser.uid}/favourites/`)
       .on("value", (snapshot) => {
-        const data = snapshot.val() ? snapshot.val() : {};
+        const data = snapshot.val() || {};
         const userList = Object.values(data);
         setUsers(userList);
       });
   }, []);
 
   // Save favourite items to the database
-  const saveFavouriteList = (newFavoritesItem) => {
-    firebase
-      .database()
-      .ref(`users/${currentUser.uid}/favourites/`)
-      .push(newFavoritesItem);
-  };
-
   const getResult = () => {
     const url = `https://www.googleapis.com/books/v1/volumes?q=${input}+intitle:${input}&key=AIzaSyDypBp7rLq3boi2BR80pmO1AVziCFa5Lg8`;
     fetch(url)
@@ -120,7 +114,11 @@ function search(props) {
                   : [...favouritesList, item];
 
                 setFavouritesList(newFavoritesList);
-                saveFavouriteList(item);
+                if (checked) {
+                  rewriteFavouriteList(newFavoritesList);
+                } else {
+                  saveFavouriteList(item);
+                }
               }}
             />
           </>

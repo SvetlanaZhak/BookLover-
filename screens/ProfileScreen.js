@@ -13,12 +13,8 @@ export default class ProfileScreen extends React.Component {
   };
   // FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
   componentDidMount() {
-    const { currentUser } = firebase.auth();
     const { email, displayName, password } = firebase.auth().currentUser;
-
-    console.log("AA", currentUser.password);
     this.setState({ email, displayName, password });
-    console.log("dispname", firebase.auth().currentUser);
   }
   render() {
     return (
